@@ -1,0 +1,25 @@
+{
+  "name": "ud989-cat-clicker-ko-starter",
+  "version": "1.0.0",
+  "description": "ud989-cat-clicker-ko-starter ============================",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bassettsj/ud989-cat-clicker-ko-starter.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bassettsj/ud989-cat-clicker-ko-starter/issues"
+  },
+  "homepage": "https://github.com/bassettsj/ud989-cat-clicker-ko-starter#readme",
+  "dependencies": {
+    "chance": "^0.7.5",
+    "express": "^4.12.4",
+    "json-server": "^0.7.13"
+  }
+}
