@@ -36,7 +36,7 @@
   }
 
   function CatCollection (cats) {
-    var self = this;
+    var self = this
     this.cats = ko.observableArray(cats.map(function (cat) {
       return new CatModel(cat.name, cat.imgSrc, cat.imgAttr, cat.nickNames)
     }))
@@ -49,8 +49,6 @@
       return self.cats.indexOf(self.selected()) === index()
     }
   }
-
-
 
   fetch('/cats')
     .then(function (res) {
