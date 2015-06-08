@@ -14,27 +14,43 @@
       </header>
       <div class="row">
         <aside class="col-md-3">
-          <nav class="panel panel-default panel-overflow">
+          <nav class="panel panel-default">
             <header class="panel-heading">
               <h4 class="panel-title">Cats</h4>
             </header>
-            <div class="list-group" data-bind="foreach: cats">
+            <div class="list-group max-overflow-scroll" data-bind="foreach: cats">
               <a href="#" class="list-group-item" data-bind="
                 text: name,
-                click: $parent.select
-              "></a>
+                click: $parent.select,
+                css: {active: $parent.isSelected($index)}
+              ">
+              </a>
             </div>
           </nav>
         </aside>
 
         <main class="col-md-9" data-bind="with: selected">
-          <article>
-            <h2 data-bind="text: name"></h2>
-            <div data-bind="text: clicks()"></div>
-            <figure>
-                <img data-bind="attr: {src: imgSrc(), alt: imgAlt()}, click: incrementClicks" role="button">
-                <figcaption data-bind="text: imgAttr()"></figcation>
+          <article class="media">
+            <figure class="media-left">
+              <img class="media-object" data-bind="attr: {src: imgSrc(), alt: imgAlt()}, click: incrementClicks" role="button">
+              <figcaption>
+                <a data-bind="attr: {href: imgAttr()}">Placekitten</a>
+              </figcation>
             </figure>
+            <div class="media-body">
+              <h4 class="media-heading" data-bind="text: name"></h4>
+              <dl>
+                <dt>Clicks</dt>
+                <dd data-bind="text: clicks()">
+                <dt>Level</dt>
+                <dd data-bind="text: level"></dd>
+                <dt>Nick Name(s)</dt>
+                <!-- ko foreach: nickNames -->
+                <dd data-bind="text: $data"></dd>
+                <!-- /ko -->
+              </dl>
+            </div>
+
           </article>
 
         </main>
