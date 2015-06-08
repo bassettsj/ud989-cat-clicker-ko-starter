@@ -1,4 +1,4 @@
-/* global ko, fetch */
+/* global ko, fetch, localStorage */
 
 (function (window) {
   'use strict'
@@ -36,7 +36,7 @@
   }
 
   function CatCollection (cats) {
-    var self = this;
+    var self = this
     this.cats = ko.observableArray(cats.map(function (cat) {
       return new CatModel(cat.name, cat.imgSrc, cat.imgAttr, cat.nickNames)
     }))
@@ -50,19 +50,42 @@
     }
   }
 
+  function getCats () {
 
-
-  fetch('/cats')
-    .then(function (res) {
-      return res.json()
+    return new Promise(function (resolve, reject) {
+      var data
+      if ('localStorage' in window) {
+        data = localStorage.getItem('catclicker')
+      }
+      if (data) {
+        return resolve(JSON.parse(data))
+      } else {
+        return resolve(
+          fetch('/cats')
+            .then(function (res) {
+              return res.json()
+            })
+            .then(function (data) {
+              if ('localStorage' in window) {
+                localStorage.setItem('catclicker', JSON.stringify(data))
+              }
+              return data
+            })
+            .catch(reject)
+        )
+      }
     })
+  }
+  var catsCollection
+  getCats()
     .then(function (data) {
-
       try {
-        ko.applyBindings(new CatCollection(data))
+        catsCollection = CatCollection(data)
+        ko.applyBindings(catsCollection)
       } catch (e) {
-        debugger;
+        return e
       }
     })
     .catch(console.error)
+
 })(window)
