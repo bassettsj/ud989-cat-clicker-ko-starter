@@ -61,7 +61,7 @@
       try {
         ko.applyBindings(new CatCollection(data))
       } catch (e) {
-        debugger;
+        return e
       }
     })
     .catch(console.error)
